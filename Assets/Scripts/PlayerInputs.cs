@@ -6,6 +6,7 @@ public class PlayerMove : MonoBehaviour
     void Start() {
         // Init Vars
         int playerSpeed = 5;
+        int health = 50;
     }
 
     // Update is called once per frame
