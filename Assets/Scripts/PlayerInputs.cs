@@ -8,6 +8,7 @@ public class PlayerMove : MonoBehaviour
         int playerSpeed = 5;
         int health = 50;
         bool isInvincible = false;
+        float superMeter = 0.0f;
     }
 
     // Update is called once per frame
