@@ -446,6 +446,7 @@ GameObject:
   - component: {fileID: 1398468993}
   - component: {fileID: 1398468992}
   - component: {fileID: 1398468997}
+  - component: {fileID: 1398468998}
   m_Layer: 0
   m_Name: Player_Ship
   m_TagString: Untagged
@@ -585,6 +586,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16eba6b50cf695f48af9b1dacf334fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  playerSpeed: 10
+  health: 50
+  isInvincible: 0
+  superMeter: 0
+  projectile: {fileID: 141685363029831644, guid: e8f090bab2e0de549b5a324fb6e07c4c, type: 3}
+  fireRate: 1
+--- !u!114 &1398468998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398468991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: 
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
