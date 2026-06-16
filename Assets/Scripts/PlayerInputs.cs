@@ -10,20 +10,24 @@ public class PlayerMove : MonoBehaviour
     public float superMeter = 0.0f;
 
     public GameObject projectile;
+    public Transform firePoint;
     public float fireRate = 1.0f;
+    public float bulletSpeed = 20.0f;
 
     private Rigidbody rb;
     private float movementX;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Start is called once at object instantiation
+    //  Get Rigidbody of the player object.
     void Start() {
         rb = GetComponent<Rigidbody>();
-
     }
 
+    // Physics calculations should be done in FixedUpdate.
+    // Add force to the player based on the movement input.
     void FixedUpdate() {
         Vector3 movement = new Vector3(movementX, 0.0f, 0.0f);
-        rb.AddForce(movement * playerSpeed);
+        rb.AddForce(movement * playerSpeed, ForceMode.Force);
     }
 
     void OnMove (InputValue movementValue) {
@@ -31,10 +35,15 @@ public class PlayerMove : MonoBehaviour
         movementX = movementVector.x;
     }
 
-    void OnFire (InputValue fireValue) {
-        if (fireValue.isPressed) {
-            Instantiate(projectile, transform.position + new Vector3(1, 0, 0), Quaternion.identity);
-        }
+    void OnAttack (InputValue fireValue) {
+        GameObject bullet = Instantiate(projectile, firePoint.position, 
+            Quaternion.identity);
+
+        Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+        
+        bulletRb.linearVelocity = firePoint.forward * bulletSpeed;
+
+        Destroy(bullet, 3.0f);
     }
 
 }
