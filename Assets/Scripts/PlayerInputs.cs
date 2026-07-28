@@ -8,11 +8,10 @@ public class PlayerMove : MonoBehaviour
     public int health = 100;
     public bool isInvincible = false;
     public float superMeter = 0.0f;
+    public float forwardMovement = 10.0f;
 
     public GameObject projectile;
     public Transform firePoint;
-    public float fireRate = 1.0f;
-    public float bulletSpeed = 20.0f;
 
     private Rigidbody rb;
     private float movementX;
@@ -26,8 +25,15 @@ public class PlayerMove : MonoBehaviour
     // Physics calculations should be done in FixedUpdate.
     // Add force to the player based on the movement input.
     void FixedUpdate() {
-        Vector3 movement = new Vector3(movementX, 0.0f, 0.0f);
-        rb.AddForce(movement * playerSpeed, ForceMode.Force);
+        // Check if the player is actively pressing a movement key
+        // if (Mathf.Abs(movementX) > 0.01f) {
+            Vector3 movement = new Vector3(movementX, 0.0f, 0.0f);
+            rb.AddForce(movement * playerSpeed, ForceMode.Force);
+        // } else {
+        //     // Kills the horizontal (X) velocity instantly when keys are released
+        //     // This preserves gravity (Y) and depth (Z) movement
+        //     rb.linearVelocity = new Vector3(0.0f, rb.linearVelocity.y, 0.0f);
+        // }
     }
 
     void OnMove (InputValue movementValue) {
@@ -35,15 +41,17 @@ public class PlayerMove : MonoBehaviour
         movementX = movementVector.x;
     }
 
+    // Checks if the collided object has the tag "Collectible"
+    void OnTriggerEnter(Collider other) {
+        if(other.gameObject.CompareTag("Collectible")){
+            Destroy(other.gameObject);
+        }
+    }
+
+
     void OnAttack (InputValue fireValue) {
-        GameObject bullet = Instantiate(projectile, firePoint.position, 
-            Quaternion.identity);
-
-        Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-        
-        bulletRb.linearVelocity = firePoint.forward * bulletSpeed;
-
-        Destroy(bullet, 3.0f);
+        // Creates an instance of the projectile at the fire point's position
+        Instantiate(projectile, firePoint.position, firePoint.rotation);
     }
 
 }
