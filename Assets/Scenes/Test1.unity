@@ -792,7 +792,8 @@ MonoBehaviour:
   isInvincible: 0
   superMeter: 0
   forwardMovement: 10
-  projectile: {fileID: 430517432607102636, guid: e8f090bab2e0de549b5a324fb6e07c4c, type: 3}
+  attackCooldown: 0.2
+  projectile: {fileID: 7946317362074045098, guid: 0426f2ec48f3fd04b85710edfef45632, type: 3}
   firePoint: {fileID: 1909545467}
 --- !u!114 &1398468998
 MonoBehaviour:

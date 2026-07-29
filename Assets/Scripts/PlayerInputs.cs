@@ -9,12 +9,15 @@ public class PlayerMove : MonoBehaviour
     public bool isInvincible = false;
     public float superMeter = 0.0f;
     public float forwardMovement = 10.0f;
+    public float attackCooldown = 0.2f;
 
     public GameObject projectile;
     public Transform firePoint;
 
     private Rigidbody rb;
     private float movementX;
+    private float attackTimer = 0.0f;
+    private bool isHolding = false;
 
     // Start is called once at object instantiation
     //  Get Rigidbody of the player object.
@@ -36,6 +39,18 @@ public class PlayerMove : MonoBehaviour
         // }
     }
 
+    void Update(){
+        isHolding = Input.GetButton("Fire1");
+
+        if (isHolding){
+            attackTimer += Time.deltaTime;
+            if (attackTimer >= attackCooldown){
+                Instantiate(projectile, firePoint.position, Quaternion.identity);
+                attackTimer = 0.0f;
+            }
+        }
+    }
+
     void OnMove (InputValue movementValue) {
         Vector2 movementVector = movementValue.Get<Vector2>();
         movementX = movementVector.x;
@@ -47,11 +62,4 @@ public class PlayerMove : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
-
-
-    void OnAttack (InputValue fireValue) {
-        // Creates an instance of the projectile at the fire point's position
-        Instantiate(projectile, firePoint.position, firePoint.rotation);
-    }
-
 }
