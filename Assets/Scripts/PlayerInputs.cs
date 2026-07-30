@@ -16,8 +16,6 @@ public class PlayerMove : MonoBehaviour
 
     private Rigidbody rb;
     private float movementX;
-    private float attackTimer = 0.0f;
-    private bool isHolding = false;
 
     // Start is called once at object instantiation
     //  Get Rigidbody of the player object.
@@ -40,15 +38,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     void Update(){
-        isHolding = Input.GetButton("Fire1");
 
-        if (isHolding){
-            attackTimer += Time.deltaTime;
-            if (attackTimer >= attackCooldown){
-                Instantiate(projectile, firePoint.position, Quaternion.identity);
-                attackTimer = 0.0f;
-            }
-        }
     }
 
     void OnMove (InputValue movementValue) {
@@ -62,4 +52,13 @@ public class PlayerMove : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
+
+
+    void OnAttack (InputValue fireValue) {
+        if (fireValue.isPressed) {
+            // Creates an instance of the projectile at the fire point's position
+            Instantiate(projectile, firePoint.position, Quaternion.identity);
+        }
+    }
+
 }
