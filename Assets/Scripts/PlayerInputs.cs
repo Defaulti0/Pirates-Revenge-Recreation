@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
     public bool isInvincible = false;
     public float superMeter = 0.0f;
     public float forwardMovement = 10.0f;
-    public float attackCooldown = 0.2f;
+    public float attackCooldown = 1.0f;
 
     public GameObject projectile;
     public Transform firePoint;
@@ -53,12 +53,19 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    void OnHoldAttack(InputValue holdValue){
+        Debug.Log("Button held");
+        Shoot();
+    }
 
     void OnAttack (InputValue fireValue) {
         if (fireValue.isPressed) {
-            // Creates an instance of the projectile at the fire point's position
-            Instantiate(projectile, firePoint.position, Quaternion.identity);
+            Shoot();
         }
     }
 
+    void Shoot(){
+        // Creates an instance of the projectile at the fire point's position
+        Instantiate(projectile, firePoint.position, Quaternion.identity);
+    }
 }
