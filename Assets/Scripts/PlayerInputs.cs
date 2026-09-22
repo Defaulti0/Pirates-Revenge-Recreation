@@ -10,6 +10,9 @@ public class PlayerMove : MonoBehaviour
     public float superMeter = 0.0f;
     public float forwardMovement = 10.0f;
     public float attackCooldown = 1.0f;
+    public float counter = 0.0f;
+
+    public InputActionReference holdAttackAction;
 
     public GameObject projectile;
     public Transform firePoint;
@@ -38,7 +41,18 @@ public class PlayerMove : MonoBehaviour
     }
 
     void Update(){
+        if(holdAttackAction.action.IsPressed()) {
+            Debug.Log("Button held");
+            counter += Time.deltaTime;
 
+            if(counter >= attackCooldown){
+                Shoot();
+                counter = 0.0f;
+            }
+        }
+        if(holdAttackAction.action.WasReleasedThisFrame()) {
+            Debug.Log("Button released");
+        }
     }
 
     void OnMove (InputValue movementValue) {
@@ -53,16 +67,9 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    void OnHoldAttack(InputValue holdValue){
-        Debug.Log("Button held");
-        Shoot();
-    }
+    // void OnAttack (InputValue fireValue) {
 
-    void OnAttack (InputValue fireValue) {
-        if (fireValue.isPressed) {
-            Shoot();
-        }
-    }
+    // }
 
     void Shoot(){
         // Creates an instance of the projectile at the fire point's position
