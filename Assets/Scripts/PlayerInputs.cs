@@ -9,8 +9,8 @@ public class PlayerMove : MonoBehaviour
     public bool isInvincible = false;
     public float superMeter = 0.0f;
     public float forwardMovement = 10.0f;
-    public float attackCooldown = 1.0f;
-    public float counter = 0.0f;
+    public float fireRate = 1.0f;
+    public float attackTimer = 0.0f;
 
     public InputActionReference holdAttackAction;
 
@@ -42,16 +42,17 @@ public class PlayerMove : MonoBehaviour
 
     void Update(){
         if(holdAttackAction.action.IsPressed()) {
-            Debug.Log("Button held");
-            counter += Time.deltaTime;
+            // Debug.Log("Button held");
+            attackTimer += Time.deltaTime;
 
-            if(counter >= attackCooldown){
+            if(attackTimer >= fireRate){
                 Shoot();
-                counter = 0.0f;
+                attackTimer = 0.0f;
             }
         }
         if(holdAttackAction.action.WasReleasedThisFrame()) {
-            Debug.Log("Button released");
+            // Debug.Log("Button released");
+            attackTimer = 0.0f;
         }
     }
 
@@ -66,11 +67,7 @@ public class PlayerMove : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
-
-    // void OnAttack (InputValue fireValue) {
-
-    // }
-
+    
     void Shoot(){
         // Creates an instance of the projectile at the fire point's position
         Instantiate(projectile, firePoint.position, Quaternion.identity);

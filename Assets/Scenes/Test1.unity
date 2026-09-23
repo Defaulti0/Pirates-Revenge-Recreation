@@ -1307,6 +1307,8 @@ MonoBehaviour:
   superMeter: 0
   forwardMovement: 10
   attackCooldown: 0.2
+  counter: 0
+  holdAttackAction: {fileID: -6415092403770045355, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   projectile: {fileID: 7946317362074045098, guid: 0426f2ec48f3fd04b85710edfef45632, type: 3}
   firePoint: {fileID: 1909545467}
 --- !u!114 &1398468998
