@@ -1306,8 +1306,8 @@ MonoBehaviour:
   isInvincible: 0
   superMeter: 0
   forwardMovement: 10
-  attackCooldown: 0.2
-  counter: 0
+  fireRate: 0.2
+  attackTimer: 0
   holdAttackAction: {fileID: -6415092403770045355, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   projectile: {fileID: 7946317362074045098, guid: 0426f2ec48f3fd04b85710edfef45632, type: 3}
   firePoint: {fileID: 1909545467}
@@ -1366,7 +1366,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 116
+  m_Constraints: 124
   m_CollisionDetection: 0
 --- !u!1001 &1454799523
 PrefabInstance:

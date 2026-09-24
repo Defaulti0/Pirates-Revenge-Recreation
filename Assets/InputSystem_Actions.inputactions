@@ -493,6 +493,28 @@
                     "action": "HoldAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4f01af0b-c0ff-468c-a0ee-9b7cd06bf9ea",
+                    "path": "<Joystick>/trigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Joystick",
+                    "action": "HoldAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "80a5d2bf-572f-4452-9248-edf0401099b1",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "HoldAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

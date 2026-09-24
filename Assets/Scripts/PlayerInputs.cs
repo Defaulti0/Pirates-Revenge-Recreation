@@ -29,18 +29,15 @@ public class PlayerMove : MonoBehaviour
     // Physics calculations should be done in FixedUpdate.
     // Add force to the player based on the movement input.
     void FixedUpdate() {
-        // Check if the player is actively pressing a movement key
-        // if (Mathf.Abs(movementX) > 0.01f) {
-            Vector3 movement = new Vector3(movementX, 0.0f, 0.0f);
-            rb.AddForce(movement * playerSpeed, ForceMode.Force);
-        // } else {
-        //     // Kills the horizontal (X) velocity instantly when keys are released
-        //     // This preserves gravity (Y) and depth (Z) movement
-        //     rb.linearVelocity = new Vector3(0.0f, rb.linearVelocity.y, 0.0f);
-        // }
+        CheckMovementInput();
     }
 
+
     void Update(){
+        CheckAttackInput();
+    }
+
+    void CheckAttackInput(){
         if(holdAttackAction.action.IsPressed()) {
             // Debug.Log("Button held");
             attackTimer += Time.deltaTime;
@@ -49,11 +46,22 @@ public class PlayerMove : MonoBehaviour
                 Shoot();
                 attackTimer = 0.0f;
             }
-        }
-        if(holdAttackAction.action.WasReleasedThisFrame()) {
+        } else if(holdAttackAction.action.WasReleasedThisFrame()) {
             // Debug.Log("Button released");
             attackTimer = 0.0f;
         }
+    }
+
+    void CheckMovementInput(){
+        // Vector3 movement = new Vector3(movementX, 0.0f, 0.0f);
+        // rb.AddForce(movement, ForceMode.Force);
+
+        // 1. Get the current velocity
+        // 2. Set the x component of the velocity
+        // 3. Set the new velocity
+        Vector3 newVelocity = rb.linearVelocity;
+        newVelocity.x = movementX * playerSpeed;
+        rb.linearVelocity = newVelocity;
     }
 
     void OnMove (InputValue movementValue) {
