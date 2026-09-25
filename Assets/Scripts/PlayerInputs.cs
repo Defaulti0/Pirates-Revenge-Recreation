@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class PlayerMove : MonoBehaviour
     public float forwardMovement = 10.0f;
     public float fireRate = 1.0f;
     public float attackTimer = 0.0f;
+    public int score = 0;
+
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI healthText;
 
     public InputActionReference holdAttackAction;
 
@@ -24,6 +29,13 @@ public class PlayerMove : MonoBehaviour
     //  Get Rigidbody of the player object.
     void Start() {
         rb = GetComponent<Rigidbody>();
+        
+        GameObject hud = GameObject.Find("HUD");
+        scoreText = hud.transform.Find("Player Score").GetComponent<TextMeshProUGUI>();
+        healthText = hud.transform.Find("Player Health").GetComponent<TextMeshProUGUI>();
+        
+        scoreText.SetText("SCORE: " + score.ToString());
+        healthText.SetText("HEALTH: " + health.ToString());
     }
 
     // Physics calculations should be done in FixedUpdate.
@@ -35,6 +47,13 @@ public class PlayerMove : MonoBehaviour
 
     void Update(){
         CheckAttackInput();
+        CheckHealth();
+    }
+
+    void CheckHealth(){
+        if(health <= 0){
+            Object.FindFirstObjectByType<GameManager>().TriggerGameOver();
+        }
     }
 
     void CheckAttackInput(){
@@ -72,6 +91,8 @@ public class PlayerMove : MonoBehaviour
     // Checks if the collided object has the tag "Collectible"
     void OnTriggerEnter(Collider other) {
         if(other.gameObject.CompareTag("Collectible")){
+            score += 100;
+            scoreText.SetText("SCORE: " + score.ToString());
             Destroy(other.gameObject);
         }
     }
