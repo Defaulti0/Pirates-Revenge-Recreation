@@ -20,16 +20,10 @@ public class ProjController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<EnemyController>(out EnemyController enemyVar))
+        if (other.CompareTag("Enemy"))
         {
-            enemyVar.health -= damage;
-            Debug.Log("Enemy Health: " + enemyVar.health);
-
-            if (enemyVar.health <= 0)
-            {
-                ScoreManager.Instance.AddScore(50);
-            }
-
+            EnemyController.Instance.DealDamage(damage);
+            ScoreManager.Instance.AddScore(25);
             Destroy(gameObject);
         }
     }
