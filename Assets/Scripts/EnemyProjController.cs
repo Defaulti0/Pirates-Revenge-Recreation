@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 public class EnemyProjController : MonoBehaviour
@@ -7,14 +6,9 @@ public class EnemyProjController : MonoBehaviour
     public float lifespan = 3.0f;
     public int damage = 10;
 
-    public TextMeshProUGUI healthText;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameObject hud = GameObject.Find("HUD");
-        healthText = hud.transform.Find("Player Health").GetComponent<TextMeshProUGUI>();
-
         Destroy(gameObject, lifespan);
     }
 
@@ -26,14 +20,10 @@ public class EnemyProjController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<PlayerMove>(out PlayerMove playerVar))
+        if (other.CompareTag("Player"))
         {
-            playerVar.health -= damage;
-
+            HealthManager.Instance.TakeDamage(damage);
             ScoreManager.Instance.AddScore(-25);
-
-            healthText.SetText("HEALTH: " + playerVar.health.ToString());
-
             Destroy(gameObject);
         }
     }

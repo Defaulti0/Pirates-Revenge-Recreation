@@ -1,11 +1,24 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject gameOverUI = null;
-    [SerializeField] private TextMeshProUGUI healthText;
+
+    public static GameManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        // Enforce the Singleton Pattern
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

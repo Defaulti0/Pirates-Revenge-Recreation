@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,15 +5,11 @@ public class PlayerMove : MonoBehaviour
 {
     // Variables
     public float playerSpeed = 0.0f;
-    public int health = 100;
-    public bool isInvincible = false;
     public float superMeter = 0.0f;
     public float forwardMovement = 10.0f;
     public float fireRate = 1.0f;
     public float attackTimer = 0.0f;
     public int score = 0;
-
-    public TextMeshProUGUI healthText;
 
     public InputActionReference holdAttackAction;
 
@@ -29,10 +24,6 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-        GameObject hud = GameObject.Find("HUD");
-        healthText = hud.transform.Find("Player Health").GetComponent<TextMeshProUGUI>();
-        healthText.SetText("HEALTH: " + health.ToString());
     }
 
     // Physics calculations should be done in FixedUpdate.
@@ -46,15 +37,6 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         CheckAttackInput();
-        CheckHealth();
-    }
-
-    void CheckHealth()
-    {
-        if (health <= 0)
-        {
-            Object.FindFirstObjectByType<GameManager>().TriggerGameOver();
-        }
     }
 
     void CheckAttackInput()
