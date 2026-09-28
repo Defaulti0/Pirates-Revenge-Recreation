@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1982223221762339918}
   - component: {fileID: 3003532634606111072}
   - component: {fileID: -4366699781814850218}
+  - component: {fileID: 7757654803802389969}
   m_Layer: 0
   m_Name: Collectible
   m_TagString: Collectible
@@ -140,3 +141,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7757654803802389969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2347039545022418676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e178c53fac21b134784c46bd3288724a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Collectable
+  scoreAmount: 100

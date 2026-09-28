@@ -1,6 +1,6 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -14,7 +14,6 @@ public class PlayerMove : MonoBehaviour
     public float attackTimer = 0.0f;
     public int score = 0;
 
-    public TextMeshProUGUI scoreText;
     public TextMeshProUGUI healthText;
 
     public InputActionReference holdAttackAction;
@@ -27,51 +26,59 @@ public class PlayerMove : MonoBehaviour
 
     // Start is called once at object instantiation
     //  Get Rigidbody of the player object.
-    void Start() {
+    void Start()
+    {
         rb = GetComponent<Rigidbody>();
-        
+
         GameObject hud = GameObject.Find("HUD");
-        scoreText = hud.transform.Find("Player Score").GetComponent<TextMeshProUGUI>();
         healthText = hud.transform.Find("Player Health").GetComponent<TextMeshProUGUI>();
-        
-        scoreText.SetText("SCORE: " + score.ToString());
         healthText.SetText("HEALTH: " + health.ToString());
     }
 
     // Physics calculations should be done in FixedUpdate.
     // Add force to the player based on the movement input.
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
         CheckMovementInput();
     }
 
 
-    void Update(){
+    void Update()
+    {
         CheckAttackInput();
         CheckHealth();
     }
 
-    void CheckHealth(){
-        if(health <= 0){
+    void CheckHealth()
+    {
+        if (health <= 0)
+        {
             Object.FindFirstObjectByType<GameManager>().TriggerGameOver();
         }
     }
 
-    void CheckAttackInput(){
-        if(holdAttackAction.action.IsPressed()) {
+    void CheckAttackInput()
+    {
+        if (holdAttackAction.action.IsPressed())
+        {
             // Debug.Log("Button held");
             attackTimer += Time.deltaTime;
 
-            if(attackTimer >= fireRate){
+            if (attackTimer >= fireRate)
+            {
                 Shoot();
                 attackTimer = 0.0f;
             }
-        } else if(holdAttackAction.action.WasReleasedThisFrame()) {
+        }
+        else if (holdAttackAction.action.WasReleasedThisFrame())
+        {
             // Debug.Log("Button released");
             attackTimer = 0.0f;
         }
     }
 
-    void CheckMovementInput(){
+    void CheckMovementInput()
+    {
         // Vector3 movement = new Vector3(movementX, 0.0f, 0.0f);
         // rb.AddForce(movement, ForceMode.Force);
 
@@ -83,21 +90,23 @@ public class PlayerMove : MonoBehaviour
         rb.linearVelocity = newVelocity;
     }
 
-    void OnMove (InputValue movementValue) {
+    void OnMove(InputValue movementValue)
+    {
         Vector2 movementVector = movementValue.Get<Vector2>();
         movementX = movementVector.x;
     }
 
-    // Checks if the collided object has the tag "Collectible"
-    void OnTriggerEnter(Collider other) {
-        if(other.gameObject.CompareTag("Collectible")){
-            score += 100;
-            scoreText.SetText("SCORE: " + score.ToString());
-            Destroy(other.gameObject);
-        }
-    }
-    
-    void Shoot(){
+    // // Checks if the collided object has the tag "Collectible"
+    // void OnTriggerEnter(Collider other) {
+    //     if(other.gameObject.CompareTag("Collectible")){
+    //         score += 100;
+    //         scoreText.SetText("SCORE: " + score.ToString());
+    //         Destroy(other.gameObject);
+    //     }
+    // }
+
+    void Shoot()
+    {
         // Creates an instance of the projectile at the fire point's position
         Instantiate(projectile, firePoint.position, Quaternion.identity);
     }

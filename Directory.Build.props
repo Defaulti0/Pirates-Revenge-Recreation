@@ -4,5 +4,7 @@
     <!-- Suppress Unity-specific false positives -->
     <!-- IDE0051: Remove unused private members (Unity messages like Start, Update) -->
     <!-- IDE0044: Add readonly modifier (serialized fields) -->
+    <!-- CS0649: Field is never assigned to (Unity serializes fields via reflection in Inspector) -->
+    <NoWarn>$(NoWarn);CS0649</NoWarn>
   </PropertyGroup>
 </Project>
