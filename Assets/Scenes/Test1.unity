@@ -1216,6 +1216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 564655755}
+  - component: {fileID: 564655756}
   m_Layer: 0
   m_Name: Health Manager
   m_TagString: Untagged
@@ -1238,6 +1239,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &564655756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564655754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f50ac226f271804bbbf6279ace708e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  health: 100
+  isInvincible: 0
+  healthText: {fileID: 94025130}
 --- !u!1001 &606155006
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2283,6 +2299,51 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99e8842bfa64cf549b3fbd81c137dc8c, type: 3}
+--- !u!1 &1389515212
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1389515213}
+  - component: {fileID: 1389515214}
+  m_Layer: 0
+  m_Name: Enemy Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1389515213
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389515212}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1389515214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389515212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f0a3680f4d5fc45810ba61f5ce1de2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  eHealth: 50
 --- !u!1 &1397068073
 GameObject:
   m_ObjectHideFlags: 0
@@ -2517,14 +2578,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   playerSpeed: 10
-  health: 10
-  isInvincible: 0
   superMeter: 0
   forwardMovement: 10
   fireRate: 0.2
   attackTimer: 0
   score: 0
-  healthText: {fileID: 0}
   holdAttackAction: {fileID: -6415092403770045355, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   projectile: {fileID: 7946317362074045098, guid: 0426f2ec48f3fd04b85710edfef45632, type: 3}
   firePoint: {fileID: 1909545467}
@@ -2775,7 +2833,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   gameOverUI: {fileID: 2038023376}
-  healthText: {fileID: 94025130}
 --- !u!4 &1634699006
 Transform:
   m_ObjectHideFlags: 0
@@ -3556,3 +3613,4 @@ SceneRoots:
   - {fileID: 1634699006}
   - {fileID: 242249340}
   - {fileID: 564655755}
+  - {fileID: 1389515213}

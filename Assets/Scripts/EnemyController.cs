@@ -4,8 +4,6 @@ public class EnemyController : MonoBehaviour
 {
 
     public static EnemyController Instance { get; private set; }
-    // Change below to let enemies have their own healths
-    public int eHealth = 50;
 
     private void Awake()
     {
@@ -29,13 +27,13 @@ public class EnemyController : MonoBehaviour
     // Called by projectiles to deal damage to the enemy
     public void DealDamage(int amount)
     {
-        eHealth -= amount;
-        Debug.Log("Enemy Health: " + eHealth);
+        health -= amount;
+        Debug.Log("Enemy Health: " + health);
     }
 
     void CheckHealth()
     {
-        if (eHealth <= 0)
+        if (health <= 0)
         {
             ScoreManager.Instance.AddScore(50);
             Destroy(gameObject);
