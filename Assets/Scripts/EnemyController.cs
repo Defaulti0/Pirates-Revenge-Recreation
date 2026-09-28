@@ -3,8 +3,9 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
 
-    public int eHealth = 50;
     public static EnemyController Instance { get; private set; }
+    // Change below to let enemies have their own healths
+    public int eHealth = 50;
 
     private void Awake()
     {
@@ -17,12 +18,6 @@ public class EnemyController : MonoBehaviour
         {
             Instance = this;
         }
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
     }
 
     // Update is called once per frame
