@@ -20,11 +20,10 @@ public class ProjController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
-            EnemyController.Instance.DealDamage(damage);
-            ScoreManager.Instance.AddScore(25);
-            Destroy(gameObject);
+            damageable.TakeDamage(damage);
         }
+        Destroy(gameObject);
     }
 }
