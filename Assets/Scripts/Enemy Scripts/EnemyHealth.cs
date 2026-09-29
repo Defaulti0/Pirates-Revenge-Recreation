@@ -14,6 +14,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         if (enemyData != null)
         {
+            currentHealth = enemyData.health;
+
             MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
             if (meshRenderer != null)
             {
@@ -47,7 +49,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     void Die()
     {
         Debug.Log("Enemy Died!");
-        ScoreManager.Instance.AddScore(50);
+        ScoreManager.Instance.AddScore(enemyData.score);
         Destroy(gameObject);
     }
 

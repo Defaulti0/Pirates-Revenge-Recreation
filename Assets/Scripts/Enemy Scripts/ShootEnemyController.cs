@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class ShootEnemyController : MonoBehaviour
 {
-    public GameObject enemyBulletPrefab;
-    public float fireRate = 1f;
+    public EnemyData enemyData;
     private float nextFireTime = 0f;
     public Transform firePoint;
 
@@ -17,8 +16,8 @@ public class ShootEnemyController : MonoBehaviour
     {
         if (Time.time >= nextFireTime)
         {
-            Instantiate(enemyBulletPrefab, firePoint.position, firePoint.rotation);
-            nextFireTime = Time.time + fireRate;
+            Instantiate(enemyData.projectilePrefab, firePoint.position, firePoint.rotation);
+            nextFireTime = Time.time + enemyData.fireRate;
         }
     }
 }
