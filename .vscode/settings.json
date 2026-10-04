@@ -1,11 +1,12 @@
 {
-    "dotnet.defaultSolution": "Pirates-Revenge-Recreation.sln",
-    "dotnet.dotnetPath": "C:/Program Files/dotnet/dotnet.exe",
+    "dotnet.defaultSolution": "Pirate Revenge.sln",
+    "dotnet.dotnetPath": "c:/program files/dotnet/dotnet.exe",
+    "dotrush.roslyn.dotnetSdkDirectory": "c:/program files/dotnet/sdk/6.0.428",
     "dotrush.msbuildProperties": {
         "DefineConstants": "UNITY_EDITOR"
     },
     "dotrush.roslyn.projectOrSolutionFiles": [
-        "C:/Users/Chris/Documents/1_Projects/1_Unity/Pirates-Revenge-Recreation/Pirates-Revenge-Recreation.sln"
+        "C:/Users/cmart/Documents/1_Projects/4-UnityProjects/Pirate Revenge/Pirate Revenge.sln"
     ],
     "dotrush.roslyn.restoreProjectsBeforeLoading": false,
     "files.exclude": {
