@@ -154,8 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a49077e6d2d479041b2520ea9fc1ab90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  speed: 3
-  health: 50
+  enemyData: {fileID: 11400000, guid: 072d7576bf61b3446b5f8b101a0e1dc0, type: 2}
   groundDirection: {x: 1, y: -1}
 --- !u!114 &-6214441765391742908
 MonoBehaviour:
@@ -169,4 +168,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e5a76b3fff14d9438678826cbf88c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  maxHealth: 50
+  enemyData: {fileID: 11400000, guid: 072d7576bf61b3446b5f8b101a0e1dc0, type: 2}

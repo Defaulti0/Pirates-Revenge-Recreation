@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class DiagLEnemyController : MonoBehaviour
 {
-    public float speed = 3.0f;
-    public int health = 50;
+    public EnemyData enemyData;
 
     // Adjust these in the inspector to change the angle
     // (1, 1) moves diagonally across the flat ground floor
@@ -21,6 +20,6 @@ public class DiagLEnemyController : MonoBehaviour
 
     void Update()
     {
-        transform.position += movementVector * speed * Time.deltaTime;
+        transform.position += movementVector * enemyData.movementSpeed * Time.deltaTime;
     }
 }

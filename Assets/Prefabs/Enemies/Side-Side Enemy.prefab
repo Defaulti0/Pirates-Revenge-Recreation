@@ -168,4 +168,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e5a76b3fff14d9438678826cbf88c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  maxHealth: 50
+  enemyData: {fileID: 11400000, guid: 6b36cc722a52f88469dba2dcf971de77, type: 2}

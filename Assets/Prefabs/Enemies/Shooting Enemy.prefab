@@ -186,8 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad0ca1f7535086d43971ed9b546762d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  enemyBulletPrefab: {fileID: 7946317362074045098, guid: 4ee0d0b55c775094ab3dc53dddd669de, type: 3}
-  fireRate: 1
+  enemyData: {fileID: 11400000, guid: bd4b45e61cdd94a42a8261d55d814fba, type: 2}
   firePoint: {fileID: 2119599297788632218}
 --- !u!114 &-747214143201282172
 MonoBehaviour:
