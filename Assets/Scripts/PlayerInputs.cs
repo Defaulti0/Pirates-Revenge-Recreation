@@ -9,12 +9,19 @@ public class PlayerMove : MonoBehaviour
     public float forwardMovement = 10.0f;
     public float fireRate = 1.0f;
     public float attackTimer = 0.0f;
+    public float dodgeSpeed = 20.0f;
+    public bool isDodging = false;
     public int score = 0;
+    public bool isInvincible = false;
 
-    public InputActionReference holdAttackAction;
+    public InputActionReference holdAttackLeft;
+    public InputActionReference holdAttackRight;
+    public InputActionReference dodgeAction;
 
     public GameObject projectile;
-    public Transform firePoint;
+    public Transform firePointLeft;
+    public Transform firePointRight;
+    public Transform firePointCenter;
 
     private Rigidbody rb;
     private float movementX;
@@ -37,27 +44,54 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         CheckAttackInput();
+        // CheckDodgeInput();
     }
 
     void CheckAttackInput()
     {
-        if (holdAttackAction.action.IsPressed())
-        {
+        if (holdAttackRight.action.IsPressed() && holdAttackLeft.action.IsPressed()) {
             // Debug.Log("Button held");
             attackTimer += Time.deltaTime;
 
             if (attackTimer >= fireRate)
             {
-                Shoot();
+                Shoot(firePointCenter);
+                attackTimer = 0.0f;
+            }
+        } else if (holdAttackRight.action.IsPressed()) {
+            // Debug.Log("Button held");
+            attackTimer += Time.deltaTime;
+
+            if (attackTimer >= fireRate)
+            {
+                Shoot(firePointRight);
                 attackTimer = 0.0f;
             }
         }
-        else if (holdAttackAction.action.WasReleasedThisFrame())
+        else if (holdAttackLeft.action.IsPressed()) {
+            // Debug.Log("Button held");
+            attackTimer += Time.deltaTime;
+
+            if (attackTimer >= fireRate)
+            {
+                Shoot(firePointLeft);
+                attackTimer = 0.0f;
+            }
+        } else if (holdAttackLeft.action.WasReleasedThisFrame() || holdAttackRight.action.WasReleasedThisFrame())
         {
             // Debug.Log("Button released");
             attackTimer = 0.0f;
         }
     }
+
+    // void CheckDodgeInput()
+    // {
+    //     if (movementX != 0.0f && dodgeAction.action.IsPressed()){
+    //         isDodging = true;
+    //     } else {
+    //         isDodging = false;
+    //     }
+    // }
 
     void CheckMovementInput()
     {
@@ -68,7 +102,22 @@ public class PlayerMove : MonoBehaviour
         // 2. Set the x component of the velocity
         // 3. Set the new velocity
         Vector3 newVelocity = rb.linearVelocity;
+
+        // if (isDodging){
+        //     BecomeInvincible();
+        // } else {
+        //     BecomeVulnerable();
+        // }
+
+        // if (isDodging){
+        //     newVelocity.x = movementX * dodgeSpeed;
+        // }
+        // else {
+        //     newVelocity.x = movementX * playerSpeed;
+        // }
+        
         newVelocity.x = movementX * playerSpeed;
+
         rb.linearVelocity = newVelocity;
     }
 
@@ -78,18 +127,19 @@ public class PlayerMove : MonoBehaviour
         movementX = movementVector.x;
     }
 
-    // // Checks if the collided object has the tag "Collectible"
-    // void OnTriggerEnter(Collider other) {
-    //     if(other.gameObject.CompareTag("Collectible")){
-    //         score += 100;
-    //         scoreText.SetText("SCORE: " + score.ToString());
-    //         Destroy(other.gameObject);
-    //     }
-    // }
-
-    void Shoot()
+    void Shoot(Transform firePoint)
     {
-        // Creates an instance of the projectile at the fire point's position
-        Instantiate(projectile, firePoint.position, Quaternion.identity);
+        // Creates an instance of the projectile at the the passed firepoint location
+        Instantiate(projectile, firePoint.position, firePoint.rotation);
+    }
+
+    void BecomeInvincible()
+    {
+        isInvincible = true;
+    }
+
+    void BecomeVulnerable()
+    {
+        isInvincible = false;
     }
 }

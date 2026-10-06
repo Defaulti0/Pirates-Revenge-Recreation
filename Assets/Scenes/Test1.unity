@@ -856,6 +856,37 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1 &391976708
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 391976709}
+  m_Layer: 0
+  m_Name: LeftFirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &391976709
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391976708}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.17364825, z: 0, w: 0.9848078}
+  m_LocalPosition: {x: -0.5, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1398468996}
+  m_LocalEulerAnglesHint: {x: 0, y: -20, z: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,6 +1061,37 @@ MonoBehaviour:
   health: 100
   isInvincible: 0
   healthText: {fileID: 94025130}
+--- !u!1 &592218678
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 592218679}
+  m_Layer: 0
+  m_Name: RightFirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &592218679
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592218678}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.17364816, z: 0, w: 0.9848078}
+  m_LocalPosition: {x: 0.5, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1398468996}
+  m_LocalEulerAnglesHint: {x: 0, y: 20, z: 0}
 --- !u!1 &612771875
 GameObject:
   m_ObjectHideFlags: 0
@@ -1950,6 +2012,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1909545467}
+  - {fileID: 391976709}
+  - {fileID: 592218679}
   - {fileID: 1962557798}
   - {fileID: 330585546}
   m_Father: {fileID: 0}
@@ -1971,10 +2035,17 @@ MonoBehaviour:
   forwardMovement: 10
   fireRate: 0.2
   attackTimer: 0
+  dodgeSpeed: 20
+  isDodging: 0
   score: 0
-  holdAttackAction: {fileID: -6415092403770045355, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  isInvincible: 0
+  holdAttackLeft: {fileID: -6415092403770045355, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  holdAttackRight: {fileID: 1894750234092193147, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  dodgeAction: {fileID: -7471211009204490832, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   projectile: {fileID: 7946317362074045098, guid: 0426f2ec48f3fd04b85710edfef45632, type: 3}
-  firePoint: {fileID: 1909545467}
+  firePointLeft: {fileID: 391976709}
+  firePointRight: {fileID: 592218679}
+  firePointCenter: {fileID: 1909545467}
 --- !u!114 &1398468998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1989,7 +2060,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
   m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
+  m_UIInputModule: {fileID: 34356532}
   m_DeviceLostEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -2004,7 +2075,7 @@ MonoBehaviour:
   m_DefaultControlScheme: 
   m_DefaultActionMap: 
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 330585545}
 --- !u!54 &1398468999
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2133,7 +2204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1909545467}
   m_Layer: 0
-  m_Name: Fire_Point
+  m_Name: CenterFirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2166,7 +2237,7 @@ GameObject:
   - component: {fileID: 1962557799}
   m_Layer: 0
   m_Name: Destroy Box
-  m_TagString: Untagged
+  m_TagString: Destroy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
