@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class ShootEnemyController : MonoBehaviour
 {
-    public EnemyData enemyData;
+    [SerializeField] private EnemyData enemyData;
+    [SerializeField] private Transform firePoint;
+    
     private float nextFireTime = 0f;
-    public Transform firePoint;
 
     // Update is called once per frame
     void Update()

@@ -5,10 +5,10 @@ public class EnemyData : ScriptableObject
 {
     public string enemyName;
     public int health;
-    public int movementSpeed;
+    public float movementSpeed;
     public int score;
     public GameObject projectilePrefab;
-    public int fireRate;
+    public float fireRate;
 
     [Header("Visual Customization")]
     public Color variationColor = Color.red;

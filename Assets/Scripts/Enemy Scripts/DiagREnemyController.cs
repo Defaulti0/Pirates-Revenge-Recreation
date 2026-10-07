@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class DiagREnemyController : MonoBehaviour
 {
-    public EnemyData enemyData;
+    [SerializeField] private EnemyData enemyData;
 
     // Adjust these in the inspector to change the angle
     // (1, 1) moves diagonally across the flat ground floor
-    public Vector2 groundDirection = new Vector2(1f, 1f);
+    private Vector2 groundDirection = new Vector2(1f, 1f);
 
     private Vector3 movementVector;
 

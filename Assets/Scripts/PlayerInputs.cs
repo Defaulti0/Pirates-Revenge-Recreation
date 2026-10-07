@@ -1,27 +1,30 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class PlayerMove : MonoBehaviour
 {
     // Variables
-    public float playerSpeed = 0.0f;
-    public float superMeter = 0.0f;
-    public float forwardMovement = 10.0f;
-    public float fireRate = 1.0f;
-    public float attackTimer = 0.0f;
-    public float dodgeSpeed = 20.0f;
-    public bool isDodging = false;
-    public int score = 0;
-    public bool isInvincible = false;
+    private float playerSpeed = 10.0f;
+    // private float forwardMovement = 10.0f;
+    // private float superMeter = 0.0f;
+    private float fireRate = 0.2f;
+    private float attackTimer = 0.0f;
 
-    public InputActionReference holdAttackLeft;
-    public InputActionReference holdAttackRight;
-    public InputActionReference dodgeAction;
+    private bool canDodge = true;
+    private bool isDodging;
+    private float dodgePower = 20.0f;
+    private float dodgingTime = 0.2f;
+    private float dodgingCooldown = 1.0f;
 
-    public GameObject projectile;
-    public Transform firePointLeft;
-    public Transform firePointRight;
-    public Transform firePointCenter;
+    [SerializeField]private InputActionReference holdAttackLeft;
+    [SerializeField]private InputActionReference holdAttackRight;
+    [SerializeField]private InputActionReference dodgeAction;
+
+    [SerializeField]private GameObject projectile;
+    [SerializeField]private Transform firePointLeft;
+    [SerializeField]private Transform firePointRight;
+    [SerializeField]private Transform firePointCenter;
 
     private Rigidbody rb;
     private float movementX;
@@ -37,14 +40,15 @@ public class PlayerMove : MonoBehaviour
     // Add force to the player based on the movement input.
     void FixedUpdate()
     {
+        if (isDodging) return;
         CheckMovementInput();
     }
 
 
     void Update()
     {
+        CheckDodgeInput();
         CheckAttackInput();
-        // CheckDodgeInput();
     }
 
     void CheckAttackInput()
@@ -84,14 +88,14 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    // void CheckDodgeInput()
-    // {
-    //     if (movementX != 0.0f && dodgeAction.action.IsPressed()){
-    //         isDodging = true;
-    //     } else {
-    //         isDodging = false;
-    //     }
-    // }
+    void CheckDodgeInput()
+    {
+        if (dodgeAction.action.IsPressed() && canDodge)
+        {
+            Debug.Log("Dodge pressed");
+            StartCoroutine(Dodge());
+        }
+    }
 
     void CheckMovementInput()
     {
@@ -102,22 +106,7 @@ public class PlayerMove : MonoBehaviour
         // 2. Set the x component of the velocity
         // 3. Set the new velocity
         Vector3 newVelocity = rb.linearVelocity;
-
-        // if (isDodging){
-        //     BecomeInvincible();
-        // } else {
-        //     BecomeVulnerable();
-        // }
-
-        // if (isDodging){
-        //     newVelocity.x = movementX * dodgeSpeed;
-        // }
-        // else {
-        //     newVelocity.x = movementX * playerSpeed;
-        // }
-        
         newVelocity.x = movementX * playerSpeed;
-
         rb.linearVelocity = newVelocity;
     }
 
@@ -133,13 +122,17 @@ public class PlayerMove : MonoBehaviour
         Instantiate(projectile, firePoint.position, firePoint.rotation);
     }
 
-    void BecomeInvincible()
+    private IEnumerator Dodge()
     {
-        isInvincible = true;
-    }
-
-    void BecomeVulnerable()
-    {
-        isInvincible = false;
+        canDodge = false;
+        isDodging = true;
+        HealthManager.Instance.isInvincible = true;
+        rb.linearVelocity = new Vector3(movementX * dodgePower, 0f);
+        yield return new WaitForSeconds(dodgingTime);
+        isDodging = false;
+        HealthManager.Instance.isInvincible = false;
+        yield return new WaitForSeconds(dodgingCooldown);
+        canDodge = true;
     }
 }
+

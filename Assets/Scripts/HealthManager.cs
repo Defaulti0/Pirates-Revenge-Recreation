@@ -5,12 +5,13 @@ using UnityEngine;
 public class HealthManager : MonoBehaviour
 {
     // Player health managed here, enemies have their own health managed in enemycontroller
-    [SerializeField] private int health = 100;
-    [SerializeField] private bool isInvincible = false;
-    // [SerializeField] private float invincibilityDuration = 1.0f;
     [SerializeField] private TextMeshProUGUI healthText;
+    
+    public bool isInvincible = false;
+    
+    private int health = 100;
     private int maxHealth = 100;
-
+    
     // Getters
     public static HealthManager Instance { get; private set; }
 
