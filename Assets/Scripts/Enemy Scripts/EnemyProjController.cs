@@ -24,7 +24,7 @@ public class EnemyProjController : MonoBehaviour
                 HealthManager.Instance.TakeDamage(damage);
                 ScoreManager.Instance.AddScore(-25);
             }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);    
     }
 }
